@@ -6,6 +6,7 @@ export function App() {
   return (
     <>
       <NxWelcome title="reactin" />
+      <h1>I should've added something otherwhise the build doesn't work</h1>
       <div />
     </>
   );
