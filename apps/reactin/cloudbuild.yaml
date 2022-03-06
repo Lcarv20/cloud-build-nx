@@ -1,4 +1,5 @@
 steps:
+# Node actions - Install, test and build
 - name: node
   entrypoint: npm
   args: ["install"]
@@ -8,6 +9,17 @@ steps:
 - name: node
   entrypoint: npm
   args: ["run", "build", "reactin"]
+
+# Docker actions - build from images inside the app and store it inside the artifact repository
+# repository name: image-repository // image name: nx-docker:1.0
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'europe-west6-docker.pkg.dev/lcarv-project/image-repository/nx-docker', '-f', "/apps/reactin", "."]
-  images: ['europe-west6-docker.pkg.dev/lcarv-project/image-repository/nx-docker']
+  args: ['build', '-t', 'europe-west6-docker.pkg.dev/lcarv-project/image-repository/nx-docker:1.0', '-f', "/apps/reactin", "."]
+  images: ['europe-west6-docker.pkg.dev/lcarv-project/image-repository/nx-docker:1.0']
+
+# Deploys to gcloud run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'cloud-build-nx', '--image', 'europe-west6-docker.pkg.dev/lcarv-project/image-repository/nx-docker:1.0']
+  
+images:
+- europe-west6-docker.pkg.dev/lcarv-project/image-repository/nx-docker
