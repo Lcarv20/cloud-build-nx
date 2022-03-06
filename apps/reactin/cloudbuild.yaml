@@ -4,7 +4,10 @@ steps:
   args: ["install"]
 - name: node
   entrypoint: npm
-  args: ["nx", "test", "reactin"]
+  args: ["test", "reactin"]
 - name: node
   entrypoint: npm
-  args: ["nx", "build", "reactin"]
+  args: ["run", "build", "reactin"]
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'europe-west6-docker.pkg.dev/lcarv-project/image-repository/nx-docker', '-f', "/apps/reactin", "."]
+  images: ['europe-west6-docker.pkg.dev/lcarv-project/image-repository/nx-docker']
