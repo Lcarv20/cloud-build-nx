@@ -1,0 +1,10 @@
+steps:
+- name: node
+  entrypoint: npm
+  args: ["install"]
+- name: node
+  entrypoint: npm
+  args: ["nx", "test", "reactin"]
+- name: node
+  entrypoint: npm
+  args: ["nx", "build", "reactin"]
