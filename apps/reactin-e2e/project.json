@@ -1,0 +1,28 @@
+{
+  "root": "apps/reactin-e2e",
+  "sourceRoot": "apps/reactin-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/reactin-e2e/cypress.json",
+        "devServerTarget": "reactin:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "reactin:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/reactin-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["reactin"]
+}

@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "reactin": "apps/reactin",
+    "reactin-e2e": "apps/reactin-e2e"
+  }
+}
