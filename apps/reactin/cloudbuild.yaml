@@ -4,7 +4,7 @@ steps:
   args: ["install"]
 - name: node
   entrypoint: npm
-  args: ["test", "reactin"]
+  args: ["run", "test", "reactin"]
 - name: node
   entrypoint: npm
   args: ["run", "build", "reactin"]
