@@ -22,4 +22,4 @@ steps:
   args: ['run', 'deploy', 'cloud-build-nx', '--image', 'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:1.0']
 
 images:
-- europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker
+- "europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker"
