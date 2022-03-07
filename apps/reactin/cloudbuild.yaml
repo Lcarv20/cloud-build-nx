@@ -15,17 +15,17 @@ steps:
 
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args:
-      [
+    args: [
         'build',
+        # tag and name of the build
         '-t',
         'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:v1.0',
+        # file path
         '-f',
-        '/apps/reactin',
+        '/apps/reactin/Dockerfile',
+        # context of execution, in this case root
         '.',
       ]
-    images:
-      ['europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:v1.0']
 
   # Push the container image to Artifact Registry - nx-images
   - name: 'gcr.io/cloud-builders/docker'
@@ -46,3 +46,6 @@ steps:
         '--image',
         'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:v1.0',
       ]
+
+images:
+  - 'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker'
