@@ -1,25 +1,51 @@
 steps:
-# Node actions - Install, test and build
-- name: node
-  entrypoint: npm
-  args: ["install"]
-- name: node
-  entrypoint: npm
-  args: ["run", "test", "reactin"]
-- name: node
-  entrypoint: npm
-  args: ["run", "build", "reactin"]
+  # Node actions - Install, test and build
+  - name: node
+    entrypoint: npm
+    args: ['install']
+  - name: node
+    entrypoint: npm
+    args: ['run', 'test', 'reactin']
+  - name: node
+    entrypoint: npm
+    args: ['run', 'build', 'reactin']
 
-# Docker actions - build from images inside the app and store it inside the artifact repository
-# repository name: nx-images // image name: nx-docker:1.0
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:1.0', '-f', "/apps/reactin", "."]
-  images: ['europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:1.0']
+  # Docker actions - build from images inside the app and store it inside the artifact repository
+  # repository name: nx-images // image name: nx-docker:v1.0
 
-# Deploys to gcloud run
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args: ['run', 'deploy', 'cloud-build-nx', '--image', 'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:1.0']
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:v1.0',
+        '-f',
+        '/apps/reactin',
+        '.',
+      ]
+    images:
+      ['europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:v1.0']
+
+  # Push the container image to Artifact Registry - nx-images
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'push',
+        'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:v1.0',
+      ]
+
+  # Deploys to gcloud run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      [
+        'run',
+        'deploy',
+        'cloud-build-nx',
+        '--image',
+        'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:v1.0',
+      ]
 
 images:
-- "europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker"
+  - 'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker'
