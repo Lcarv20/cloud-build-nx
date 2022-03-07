@@ -46,3 +46,6 @@ steps:
         '--image',
         'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:v1.0',
       ]
+
+images:
+  - 'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker'
