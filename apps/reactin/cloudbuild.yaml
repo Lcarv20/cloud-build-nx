@@ -19,10 +19,10 @@ steps:
         'build',
         # tag and name of the build
         '-t',
-        'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:v1.0',
+        'europe-west6-docker.pkg.dev/cloud-build-nx/nx-images/nx-docker:v1.0',
         # file path
         '-f',
-        '/apps/reactin/Dockerfile',
+        'apps/reactin/Dockerfile',
         # context of execution, in this case root
         '.',
       ]
@@ -32,7 +32,7 @@ steps:
     args:
       [
         'push',
-        'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:v1.0',
+        'europe-west6-docker.pkg.dev/cloud-build-nx/nx-images/nx-docker:v1.0',
       ]
 
   # Deploys to gcloud run
@@ -44,8 +44,8 @@ steps:
         'deploy',
         'cloud-build-nx',
         '--image',
-        'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker:v1.0',
+        'europe-west6-docker.pkg.dev/cloud-build-nx/nx-images/nx-docker:v1.0',
       ]
 
 images:
-  - 'europe-west6-docker.pkg.dev/lcarv-project/nx-images/nx-docker'
+  - 'europe-west6-docker.pkg.dev/cloud-build-nx/nx-images/nx-docker:v1.0'
