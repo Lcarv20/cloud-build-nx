@@ -3,15 +3,19 @@ import { render } from '@testing-library/react';
 import App from './app';
 
 describe('App', () => {
-  it('should render successfully', () => {
-    const { baseElement } = render(<App />);
+	it('should render successfully', () => {
+		const { baseElement } = render(<App />);
 
-    expect(baseElement).toBeTruthy();
-  });
+		expect(baseElement).toBeTruthy();
+	});
 
-  it('should have a greeting as the title', () => {
-    const { getByText } = render(<App />);
+	it('should have a greeting as the title', () => {
+		const { getByText } = render(<App />);
 
-    expect(getByText(/Welcome reactin/gi)).toBeTruthy();
-  });
+		expect(
+			getByText(
+				/I should've added something otherwhise the build doesn't work/gi
+			)
+		).toBeTruthy();
+	});
 });
