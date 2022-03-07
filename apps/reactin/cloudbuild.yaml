@@ -42,9 +42,12 @@ steps:
       [
         'run',
         'deploy',
-        'cloud-build-nx',
+        'reactin',
         '--image',
         'europe-west6-docker.pkg.dev/cloud-build-nx/nx-images/nx-docker:v1.0',
+        '--region',
+        'europe-west6',
+        '--allow-unauthenticated',
       ]
 
 images:
